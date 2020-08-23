@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert Employee</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+<style>
+    body {
+        background-color: aliceblue;
+    }
+
+    div {
+
+    }
+</style>
+<h1>Insert Employee</h1>
+<div class="jumbotron center align-center">
+    <form method="POST" class="post-form" action="{% url 'emp' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="id_empName">Employee name
+            {{ form.empName }}</label><br>
+        <label for="id_password">Password
+            {{ form.password }}</label><br>
+        <label for="id_email">Email
+            {{ form.email }}</label><br>
+        <label>Gender</label>
+			<select name="employee_gender">
+				<option value="--">--</option>
+				<option value="MALE">MALE</option>
+				<option value="FEMALE">FEMALE</option>
+			</select><br>
+        <label for="id_phone">Phone
+            {{ form.phone }}</label><br>
+        <label for="id_phone">Image (Optional)
+            {{ form.image }}</label><br>
+        <label for="id_address">Address
+            {{ form.address }}</label><br>
+        <button class="btn btn-primary">Save Data</button>
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+        $('input').attr('class', 'form-control')
+        $('textarea').attr('class', 'form-control')
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", {packages: ["line"]});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn("number", "Projects");
+            data.addColumn("number", "Python");
+            data.addColumn("number", "JAVA");
+            data.addColumn("number", "Kotlin");
+
+            data.addRows([
+                [1, 37.8, 80.8, 41.8],
+                [2, 30.9, 69.5, 32.4],
+                [3, 25.4, 57, 25.7],
+                [4, 11.7, 18.8, 10.5],
+                [5, 11.9, 17.6, 10.4],
+                [6, 8.8, 13.6, 7.7],
+                [7, 7.6, 12.3, 9.6],
+                [8, 12.3, 29.2, 10.6],
+                [9, 16.9, 42.9, 14.8],
+                [10, 12.8, 30.9, 11.6],
+                [11, 5.3, 7.9, 4.7],
+                [12, 6.6, 8.4, 5.2],
+                [13, 4.8, 6.3, 3.6],
+                [14, 4.2, 6.2, 3.4],
+            ]);
+
+            var options = {
+                chart: {
+                    title: "",
+                    subtitle: "",
+                },
+                width: 900,
+                height: 500,
+                axes: {
+                    x: {
+                        0: {side: "top"},
+                    },
+                },
+            };
+
+            var chart = new google.charts.Line(document.getElementById("line_top_x"));
+
+            chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+    </script>
+
+    <script type="text/javascript">
+        google.charts.load("current", {packages: ["line"]});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn("number", "Day");
+            data.addColumn("number", "Skills Distribution");
+
+            data.addRows([
+                [1, 37],
+                [2, 30],
+                [3, 25],
+                [4, 11],
+                [5, 0],
+                [6, 8],
+                [5, 10],
+                [8, 12],
+                [9, 16],
+                [10, 12],
+                [11, 5],
+                [12, 6],
+                [13, 4],
+                [14, 4],
+            ]);
+
+            var options = {
+                chart: {
+                    title: "",
+                },
+
+                series: {
+                    0: {color: "#243442"},
+                },
+                width: 900,
+                height: 500,
+
+                axes: {
+                    x: {
+                        0: {side: "top"},
+                    },
+                },
+            };
+
+            var chart = new google.charts.Line(document.getElementById("projects"));
+
+            chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+    </script>
+    <script type="text/javascript">
+        google.charts.load("current", {packages: ["line"]});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn("number", "Projects");
+            data.addColumn("number", "Python");
+            data.addColumn("number", "JavaScript");
+            data.addColumn("number", "Java");
+            data.addColumn("number", "C");
+            data.addColumn("number", "C++");
+            data.addColumn("number", "C#");
+
+            data.addRows([
+                [1, 37, 2, 34, 34, 12, 10],
+                [2, 30, 5, 34, 34, 12, 10],
+                [3, 25, 20, 34, 34, 12, 10],
+                [4, 11, 35, 34, 34, 12, 10],
+            ]);
+
+            var options = {
+                chart: {
+                    title: "",
+                },
+
+                width: 1000,
+                height: 500,
+
+                axes: {
+                    x: {
+                        0: {side: "top"},
+                    },
+                },
+            };
+
+            var chart = new google.charts.Line(document.getElementById("lang"));
+
+            chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+    </script>
+    <title>Employee Dashboard</title>
+</head>
+<body>
+<style>
+    li {
+        display: inline;
+    }
+
+    #line_top_x,
+    #projects,
+    #lang {
+        position: absolute;
+        top: 20%;
+    }
+
+    img {
+        width: 50px;
+    }
+</style>
+<nav class="navbar navbar-dark bg-dark">
+    <li class="text-light">
+        <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt=""/>{{ name }}
+    </li>
+    <li><a href="#" id="skill" class="btn btn-dark">Used Programming Languages</a></li>
+    <li><a href="#" id="projects_graph" class="btn btn-dark">Skill Distribution </a></li>
+    <li><a href="#" id="lang_graph" class="btn btn-dark">Projects Completed </a></li>
+</nav>
+
+<div id="line_top_x" hidden></div>
+<div id="projects" hidden></div>
+<div id="lang" hidden></div>
+<script>
+    $("#skill").click(function () {
+        $("#line_top_x").fadeToggle().attr("hidden", false);
+    });
+    $("#projects_graph").click(function () {
+        $("#projects").fadeToggle().attr("hidden", false);
+    });
+    $("#lang_graph").click(function () {
+        $("#lang").fadeToggle().attr("hidden", false);
+    });
+</script>
+</body>
+</html>

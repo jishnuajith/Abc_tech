@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="./avatar.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Meie+Script&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}" />
+    <title>SignIn</title>
+  </head>
+
+  <body>
+    <style>
+      .error {
+        border: 2px solid rgb(235, 27, 27);
+        border-radius: 5px !important;
+      }
+      body {
+        background-color: rgb(190, 247, 33);
+      }
+      .realtime {
+      }
+    </style>
+    <div class="main jumbotron">
+      <p class="heading text-info" title="Sign in here.......">Sign in here.......</p>
+
+      <form action="{% url 'adminsignin' %}" method="post">
+        {% csrf_token %}
+        <div class="form-area">
+          <label class="text-dark" for="userName" title="Username"
+            >Username
+            <input
+              required
+              type="text"
+              name="username"
+              maxlength="50"
+              id="userName"
+              class="form-control input"
+              autocomplete="off"
+            /> </label
+          ><br />
+          <label class="text-dark" for="userPsw" title="Password"
+            >Password
+            <input type="password" name="password" id="userPsw" class="form-control input" autocomplete="off" required />
+
+            <div class="custom-control custom-switch toggle-div">
+              <input type="checkbox" class="custom-control-input" id="switch1" name="example" />
+              <label class="custom-control-label" for="switch1" id="hideShow" title="Show">Show</label>
+            </div>
+          </label>
+          <p style="color: red">{{ message }}</p>
+
+          <button id="submitButton" class="btn btn-dark"  onclick="" title="Submit">Sign in</button>
+        </div>
+      </form>
+
+      <!-- <label for="userPswCheck">Enter Password Again
+      <input type="password" maxlength="30" name="userPswCheck" id="userPswCheck" class="form-control"
+        autocomplete="off" />
+    </label> -->
+    </div>
+
+    <!-- loader -->
+    <div class="d-flex justify-content-center">
+      <div
+        class="spinner-border text-info loader"
+        style="position: fixed; /* z-index: 5; */ font-size: 20px; font-weight: bold;"
+        hidden
+        id="spinner"
+      ></div>
+    </div>
+
+    <i class="far fa-id-badge icon"></i>
+    <br />
+    <span class="realtime" id="realTime"></span>
+
+        <a href="signin/">Employee</a>
+
+    <div
+      class="alert alert-danger"
+      id="check"
+      hidden
+      style="position: absolute !important; top: 10%; left: 40%; box-shadow: 4px 3px 6px 0px rgba(44, 43, 43, 0.507);"
+    ></div>
+
+    <script>
+      $("#switch1").click(function () {
+        if ($(this).prop("checked") == true) {
+          // console.log("Checkbox is checked.");
+          $("#userPsw").attr("type", "text");
+          $("#hideShow").text("Hide").attr("title", "Hide");
+        } else if ($(this).prop("checked") == false) {
+          // console.log("Checkbox is unchecked.");
+          $("#userPsw").attr("type", "password");
+          $("#hideShow").text("Show").attr("title", "Show");
+        }
+      });
+
+      $("#userName ,#userPsw").focus(function () {
+        $("i").css("color", "");
+      });
+      $("#userName, #userPsw").blur(function () {
+        $("i").css("color", "");
+      });
+      $("#userName").on("keyup", function () {
+        $("#realTime").text(function () {
+          return $("#userName").val().toUpperCase();
+        });
+      });
+
+      // checking and hide START
+
+      $("#userName").keyup(function () {
+        var name = $(this).val().trim();
+        var nmLen = name.length;
+        if (nmLen > 0) {
+          $("#check").fadeOut("slow");
+          $("#userName").removeClass("error");
+        }
+      });
+
+      $("#userPsw").keyup(function () {
+        var name = $(this).val().trim();
+        var nmLen = name.length;
+        if (nmLen > 0) {
+          $("#check").fadeOut("slow");
+          $("#userPsw").removeClass("error");
+        }
+      });
+      $("#submitButton").click(function () {
+        var name = $("#userName").val().trim();
+        var password = $("#userPsw").val().trim();
+
+        if (name === "") {
+        } else {
+          $("#check").text("Please Enter Password");
+          $("#userName").removeClass("error");
+        }
+
+        if (password === "") {
+        } else {
+          $("#check").text("Please Enter Username");
+          $("#userPsw").removeClass("error");
+        }
+      });
+
+      // checking and hide END
+
+      // Checking both inputs START
+
+      // Checking both inputs END
+
+      function insertValue() {
+        var name = $("#userName").val().trim();
+        var password = $("#userPsw").val().trim();
+        var nmLen = name.length;
+        var pswLen = password.length;
+
+        if (pswLen === 0 || nmLen === 0) {
+          $("#check").fadeIn().attr("hidden", false).text("Please enter Username & Password");
+          $("#userName").addClass("error");
+          $("#userPsw").addClass("error");
+
+          // $("#userPsw").focus(function () {
+          //   $("#check").fadeOut(2000);
+          // });
+        } else {
+          function cache() {
+            localStorage.setItem("name", name);
+          }
+          cache();
+          var request = new XMLHttpRequest();
+          request.open("POST", "database.php?userName=" + name + "&userPsw=" + password, false);
+
+          request.send();
+          $("#spinner").attr("hidden", false);
+          setTimeout(done, 1000);
+          $("#userName").removeClass("error");
+          $("#userPsw").removeClass("error");
+
+          function done() {
+            $("#spinner").removeClass("spinner-border").text("Done");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
+l>

@@ -1,0 +1,79 @@
+* {
+  user-select: none;
+}
+body {
+ 
+  /* background-size: cover; */
+  overflow: hidden;
+
+}
+.main {
+  position: absolute;
+  padding: 10px;
+  width: 50%;
+  height: 1000px;
+  /* background-color: antiquewhite; */
+  /* text-align: center; */
+}
+.heading {
+  font-family: "Baloo Tamma 2", cursive;
+  text-transform: capitalize;
+  /* position: relative; */
+  top: 10%;
+  font-size: 50px;
+  margin-left: 10%;
+  margin-top: 5%;
+}
+.icon {
+  position: absolute;
+  top: 10%;
+  right: 0%;
+  float: right;
+  width: 40%;
+  height: 500px;
+  align-items: center;
+  font-size: 500px;
+  left: 60%;
+}
+
+.form-area {
+  margin-left: 10%;
+  margin-top: 15%;
+}
+.input,
+label {
+  width: 500px;
+  margin-top: 10px;
+  font-family: "Baloo Tamma 2", cursive;
+  font-size: 20px;
+}
+.toggle-div {
+  position: absolute;
+  left: 80%;
+}
+.mn {
+  position: relative;
+  top: 625px;
+  z-index: 10;
+  display: block;
+  font-family: "Meie Script", cursive;
+  transition: 10s;
+}
+.name {
+  font-family: "Heebo", sans-serif;
+}
+.realtime {
+  position: relative;
+  top: 450px;
+  left: 70%;
+  z-index: 10;
+  font-family: "Heebo", sans-serif;
+  overflow: hidden;
+  text-align: center;
+}
+.loader {
+  position: fixed;
+  /* z-index: 5; */
+  font-size: 20px;
+  font-weight: bold;
+}

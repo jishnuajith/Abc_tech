@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Records</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/employee.css' %}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+<style>
+    th,td{
+        text-align: left;
+
+    }
+    tr:hover{
+        box-shadow: 0 1px 3px 1px rgba(108, 109, 108, 0.72);
+        cursor: pointer;
+    }
+    tr{
+        border-radius: 5px;
+    }
+</style>
+<a href="insert" class="btn btn-primary m-5">Add New Employee</a>
+<a href="/admin/dashboard" class="btn btn-primary m-5 ">Go to Dashboard</a>
+<a href="" class="badge badge-warning m-5" style="float: right;font-size: 30px">Total Employees: {{ count }}</a>
+<table class="table  table-hover">
+    <thead class="">
+    <tr>
+<th>Image</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Edit</th>
+        <th>Delete</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for employee in employees %}
+        <tr>
+            <td>
+                <img class="image" style="width: 50px;border-radius: 50%" src="{{ employee.image.url }}" alt="avatar icon" >
+            </td>
+            <td>{{ employee.empName }}</td>
+            <td><a href="mailto:{{ employee.email }}"> {{ employee.email }}</a>
+              </td>
+            <td><a href="tel:{{ employee.phone }}"> {{ employee.phone }}</a></td>
+
+
+            <td>
+                <a href="/admin/Emp_management/employee/{{ employee.id }}/change" target="_blank"><span class="btn btn-primary m-2 edit">Edit</span></a>
+
+            </td> <td>
+
+                <a href="/admin/delete/{{ employee.id }}" class="btn btn-danger delete">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+
+</body>
+</html>

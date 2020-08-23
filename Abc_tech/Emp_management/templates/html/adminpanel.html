@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Admin Panel</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+<body>
+<style>
+    body{
+        transition: 2s;
+
+    }
+</style>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+        google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Months');
+      data.addColumn('number', 'Male');
+      data.addColumn('number', 'Female');
+
+
+      data.addRows([
+        [1,  37, 80],
+        [2,  50, 69],
+        [3,  25,   57],
+        [4,  11, 18],
+        [5,  11, 17],
+        [6,   8, 13],
+        [7,   7, 12],
+        [8,  12, 29],
+        [9,  16, 42],
+        [10, 12, 30],
+        [11,  5,  7],
+        [12,  12,  8],
+
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Employee Gender Distribution',
+          subtitle: '(2019-20)'
+        },
+        width: 900,
+        height: 500,
+        axes: {
+          x: {
+            0: {side: 'top'}
+          }
+        }
+      };
+
+      var chart = new google.charts.Line(document.getElementById('chart_div'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+
+</script>
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-light">
+    <a href="" style="font-size: 30px; text-decoration: none;" class="badge badge-primary">ADMIN PANEL</a>
+    <a href="insert" style="font-size: 20px; text-decoration: none;" class="btn btn-primary">ADD EMPLOYEE</a>
+    <a href="show" style="font-size: 20px; text-decoration: none;" class="btn btn-primary">EMPLOYEE LIST</a>
+    <li style="font-size: 25px;" class="badge badge-warning">Total Employee: {{ count }}</li>
+   <a href="/signin"><li style="font-size: 20px; text-decoration: none;" class="btn btn-primary" >SIGN OUT</li></a>
+</nav>
+<div id="chart_div" style="margin-left: 50px"></div>
+
+{#  {% for i in (1,count) %}#}
+{#      {{ i }}#}
+{#  {% endfor %}#}
+</body>
+</html>
